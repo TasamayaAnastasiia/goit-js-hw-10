@@ -26,18 +26,18 @@ function updateTimerDisplay(days, hours, minutes, seconds) {
 function calculateTimeDifference(selectedDate) {
   const currentDate = new Date();
   const timeDifference = selectedDate.getTime() - currentDate.getTime();
-  const totalSeconds = Math.floor(timeDifference / 1000);
-
-  if (totalSeconds <= 0) {
+  
+  if (timeDifference <= 0) {
     clearInterval(countdownInterval);
     iziToast.error({
       title: "Error",
-      message: "Please choose a date in the future",
+      message: "Time has already passed",
     });
-    startButton.disabled = true; 
+    startButton.disabled = true;
     return;
   }
 
+  const totalSeconds = Math.floor(timeDifference / 1000);
   const days = Math.floor(totalSeconds / (3600 * 24));
   const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
   const minutes = Math.floor((totalSeconds % 3600) / 60);
@@ -64,7 +64,6 @@ datetimePicker.addEventListener("change", () => {
 startButton.addEventListener("click", () => {
   const selectedDate = new Date(datetimePicker.value);
 
-  
   if (selectedDate <= new Date()) {
     iziToast.error({
       title: "Error",

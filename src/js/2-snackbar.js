@@ -11,9 +11,9 @@ formPromise.addEventListener("submit", function (e) {
     const promise = new Promise((resolve, reject) => {  /*create promise*/
         setTimeout(() => {
             if (state === "fulfilled") {
-                resolve("Success!");
+                resolve(delay);
             } else {
-                reject("Error!");
+                reject(delay);
             }
         }, delay);
     });
